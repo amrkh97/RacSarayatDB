@@ -23,3 +23,14 @@ CREATE TABLE Positions
 
     PRIMARY KEY(PositionName)
 );
+
+
+CREATE TABLE MemberPositions
+(
+    ID INT IDENTITY,
+    MemberID NVARCHAR(14),
+    MemberPosition NVARCHAR(64),
+
+    FOREIGN KEY (MemberID) REFERENCES Members(ID),
+    FOREIGN KEY (MemberPosition) REFERENCES Positions(PositionName)
+);
