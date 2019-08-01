@@ -1,0 +1,16 @@
+USE RAC_SARAYAT
+GO
+
+CREATE TABLE Members
+(
+    ID NVARCHAR(14),
+    FName NVARCHAR(64),
+    LName NVARCHAR(64),
+    BirthDate DATETIME DEFAULT GETDATE(),
+    Age INT,
+    Mail NVARCHAR(64),
+    YearsInClub NVARCHAR(14)
+
+    PRIMARY KEY(MemberID)
+
+);
