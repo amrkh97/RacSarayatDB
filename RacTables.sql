@@ -24,6 +24,19 @@ CREATE TABLE Positions
     PRIMARY KEY(PositionName)
 );
 
+INSERT INTO Positions
+(PositionName, PositionDescription)
+VALUES
+('Past-President','Past-President'),
+('President','President'),
+('Vice President', 'Vice President'),
+('Secretary', 'Secretary'),
+('Treasurer','Treasurer'),
+('Public Relations', 'Public Relations'),
+('Fundraising','Fundraising'),
+('International','International'),
+('Community','Community'),
+('Club Service','Club Service')
 
 CREATE TABLE MemberPositions
 (
