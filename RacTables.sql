@@ -14,3 +14,12 @@ CREATE TABLE Members
     PRIMARY KEY(MemberID)
 
 );
+
+CREATE TABLE Positions
+(
+    ID INT IDENTITY,
+    PositionName NVARCHAR(64),
+    PositionDescription NVARCHAR(MAX)
+
+    PRIMARY KEY(PositionName)
+);
