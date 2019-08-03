@@ -3,6 +3,7 @@ GO
 
 CREATE TABLE Members
 (
+    MemberID Int IDENTITY,
     ID NVARCHAR(14),
     FName NVARCHAR(64),
     LName NVARCHAR(64),
@@ -11,8 +12,21 @@ CREATE TABLE Members
     Mail NVARCHAR(64),
     YearsInClub NVARCHAR(14)
 
-    PRIMARY KEY(MemberID)
+    PRIMARY KEY(ID)
 
+);
+
+CREATE TABLE MemberToBe
+(
+    ID NVARCHAR(14),
+    FName NVARCHAR(64),
+    LName NVARCHAR(64),
+    BirthDate DATETIME DEFAULT GETDATE(),
+    Age INT,
+    Mail NVARCHAR(64),
+    ReferedBy NVARCHAR(64)
+
+    PRIMARY KEY(ID)
 );
 
 CREATE TABLE Positions
