@@ -7,7 +7,7 @@ CREATE TABLE MemberStatus
     ID INT IDENTITY,
     StatusCode NVARCHAR(2),
     StatusMeaning NVARCHAR(50),
-    PRIMARY KEY(ID)
+    PRIMARY KEY(StatusCode)
 );
 
 INSERT INTO MemberStatus
@@ -37,6 +37,30 @@ VALUES
     N'Suspended Member'
 )
 
+CREATE TABLE Positions
+(
+    ID INT IDENTITY,
+    PositionName NVARCHAR(64),
+    PositionDescription NVARCHAR(MAX)
+
+    PRIMARY KEY(ID)
+);
+
+INSERT INTO Positions
+(PositionName, PositionDescription)
+VALUES
+('Past-President','Past-President'),
+('President','President'),
+('Vice President', 'Vice President'),
+('Secretary', 'Secretary'),
+('Treasurer','Treasurer'),
+('Public Relations', 'Public Relations'),
+('Fundraising','Fundraising'),
+('International','International'),
+('Community','Community'),
+('Club Service','Club Service'),
+('Member','Member')
+
 CREATE TABLE Members
 (
     MemberID Int IDENTITY,
@@ -44,7 +68,7 @@ CREATE TABLE Members
     FName NVARCHAR(64),
     LName NVARCHAR(64),
     BirthDate DATETIME DEFAULT GETDATE(),
-    Age INT DEFAULT DATEDIFF(YY,BirthDate,GETDATE()),
+    Age as DATEDIFF(YEAR, BirthDate, GETDATE()),
     Mail NVARCHAR(100) UNIQUE NOT NULL,
     MemberPassword NVARCHAR(250),
     YearsInClub NVARCHAR(2) DEFAULT '0',
@@ -52,7 +76,7 @@ CREATE TABLE Members
     MemberStatus NVARCHAR(2) DEFAULT '00',
     LogInStatus NVARCHAR(2) DEFAULT '00',
 
-    PRIMARY KEY(ID),
+    PRIMARY KEY(MemberID),
     FOREIGN KEY(PositionID) REFERENCES Positions(ID),
     FOREIGN KEY(MemberStatus) REFERENCES MemberStatus(StatusCode)
 
@@ -70,29 +94,6 @@ CREATE TABLE MemberToBe
 
     PRIMARY KEY(ID)
 );
-
-CREATE TABLE Positions
-(
-    ID INT IDENTITY,
-    PositionName NVARCHAR(64),
-    PositionDescription NVARCHAR(MAX)
-
-    PRIMARY KEY(PositionName)
-);
-
-INSERT INTO Positions
-(PositionName, PositionDescription)
-VALUES
-('Past-President','Past-President'),
-('President','President'),
-('Vice President', 'Vice President'),
-('Secretary', 'Secretary'),
-('Treasurer','Treasurer'),
-('Public Relations', 'Public Relations'),
-('Fundraising','Fundraising'),
-('International','International'),
-('Community','Community'),
-('Club Service','Club Service')
 
 CREATE TABLE GeneralParameters
 (
