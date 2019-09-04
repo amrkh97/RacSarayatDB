@@ -120,7 +120,7 @@ VALUES
 CREATE TABLE Treasury
 (
     ID INT IDENTITY,
-    CurrentAmount FLOAT,
+    CurrentAmount INT,
     DateOfChange DATETIME DEFAULT GETDATE(),
 
     PRIMARY KEY(ID)
@@ -147,3 +147,35 @@ CREATE TABLE Payments
     PRIMARY KEY(ID),
 
 );
+
+
+-- FOR TESTING PURPOSES ONLY
+INSERT INTO Members
+(
+    ID,
+    FName,
+    LName,
+    Mail,
+    MemberPassword,
+    YearsInClub,
+    PositionID
+)
+VALUES
+(
+    N'29704090101931',
+    N'Amr',
+    N'Khaled',
+    N'amrkh97@gmail.com',
+    N'12345678',
+    N'3',
+    3
+)
+
+INSERT INTO Treasury
+(
+    CurrentAmount
+)
+VALUES
+(
+    1000
+)

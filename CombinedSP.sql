@@ -72,7 +72,6 @@ END
 UPDATE Members
 SET LogInStatus = '00' --Logged In
 WHERE Mail = @Email
-AND MemberPassword = @Password
 AND LogInStatus = '01' --Was Already Logged Out
 AND MemberStatus <> '04' --Suspended
 
@@ -145,7 +144,7 @@ AS
 BEGIN
 
 SELECT * FROM Treasury
-WHERE PaymentYear Like '%' + @Year + '%'
+WHERE DATEPART(YEAR, DateOfChange) Like '%' + @Year + '%'
 
 END
 GO
@@ -158,8 +157,8 @@ AS
 BEGIN
 
 SELECT * FROM Treasury
-WHERE PaymentYear Like '%' + @Year + '%'
-AND PaymentMonth = @Month
+WHERE DATEPART(YEAR, DateOfChange) Like '%' + @Year + '%'
+AND DATEPART(MONTH, DateOfChange) = @Month
 
 END
 GO
@@ -167,8 +166,8 @@ GO
 CREATE OR ALTER PROC usp_Payment_Pay
 @PaidAmount INT,
 @RecieverOfPayment NVARCHAR(100),
-@HexCode NVARCHAR(2),
-@HexMsg NVARCHAR(50)
+@HexCode NVARCHAR(2) OUTPUT,
+@HexMsg NVARCHAR(50) OUTPUT
 AS
 BEGIN
 
@@ -184,12 +183,21 @@ RETURN -1
 END
 DECLARE @CheckAmount INT
 SET @CheckAmount = (SELECT TOP 1 CurrentAmount FROM Treasury ORDER BY ID DESC)-@PaidAmount
-IF(@CheckAmount < @PaidAmount)
+IF(@CheckAmount < @MinimumThreshold)
 BEGIN
 SET @HexCode = '02'
 SET @HexMsg = 'Amount Exceeds Currently Allowed Threshold'
 RETURN -1
 END
+
+INSERT INTO Treasury
+(
+    CurrentAmount
+)
+VALUES
+(
+    @CheckAmount
+)
 
 INSERT INTO Payments
 (
@@ -201,6 +209,7 @@ VALUES
     @PaidAmount,
     @RecieverOfPayment
 )
+
 
 SET @HexCode = '00'
 SET @HexMsg = 'Payment Succeeded'
