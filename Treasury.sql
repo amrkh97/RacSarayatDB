@@ -62,7 +62,7 @@ AS
 BEGIN
 
 SELECT * FROM Treasury
-WHERE PaymentYear Like '%' + @Year + '%'
+WHERE DATEPART(YEAR, DateOfChange) Like '%' + @Year + '%'
 
 END
 GO
@@ -75,8 +75,8 @@ AS
 BEGIN
 
 SELECT * FROM Treasury
-WHERE PaymentYear Like '%' + @Year + '%'
-AND PaymentMonth = @Month
+WHERE DATEPART(YEAR, DateOfChange) Like '%' + @Year + '%'
+AND DATEPART(MONTH, DateOfChange) = @Month
 
 END
 GO
@@ -84,8 +84,8 @@ GO
 CREATE OR ALTER PROC usp_Payment_Pay
 @PaidAmount INT,
 @RecieverOfPayment NVARCHAR(100),
-@HexCode NVARCHAR(2),
-@HexMsg NVARCHAR(50)
+@HexCode NVARCHAR(2) OUTPUT,
+@HexMsg NVARCHAR(50) OUTPUT
 AS
 BEGIN
 
@@ -101,12 +101,21 @@ RETURN -1
 END
 DECLARE @CheckAmount INT
 SET @CheckAmount = (SELECT TOP 1 CurrentAmount FROM Treasury ORDER BY ID DESC)-@PaidAmount
-IF(@CheckAmount < @PaidAmount)
+IF(@CheckAmount < @MinimumThreshold)
 BEGIN
 SET @HexCode = '02'
 SET @HexMsg = 'Amount Exceeds Currently Allowed Threshold'
 RETURN -1
 END
+
+INSERT INTO Treasury
+(
+    CurrentAmount
+)
+VALUES
+(
+    @CheckAmount
+)
 
 INSERT INTO Payments
 (
@@ -121,6 +130,50 @@ VALUES
 
 SET @HexCode = '00'
 SET @HexMsg = 'Payment Succeeded'
+END
+GO
+
+CREATE OR ALTER PROC usp_Treasury_GetMembersPaid
+@Month NVARCHAR(2),
+@Year NVARCHAR(4)
+AS
+BEGIN
+
+SELECT Members.*,Fees.* FROM Fees
+INNER JOIN Members
+ON Members.MemberID = Fees.MemberID
+WHERE PaymentYear Like '%' + @Year + '%'
+AND PaymentMonth = @Month
+AND Fees.MemberID IS NOT NULL
+
+END
+GO
+
+CREATE OR ALTER PROC usp_Treasury_GetHistoryMember
+@MemberID INT
+AS
+BEGIN
+
+SELECT Members.*,Fees.* FROM Fees
+INNER JOIN Members
+ON Members.MemberID = Fees.MemberID
+AND Fees.MemberID = @MemberID
+
+END
+GO
+
+CREATE OR ALTER PROC usp_Treasury_GetHistoryMemberByYear
+@MemberID INT,
+@Year NVARCHAR(4)
+AS
+BEGIN
+
+SELECT Members.*,Fees.* FROM Fees
+INNER JOIN Members
+ON Members.MemberID = Fees.MemberID
+AND Fees.MemberID = @MemberID
+AND PaymentYear = @Year
+
 END
 GO
 

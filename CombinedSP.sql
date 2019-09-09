@@ -215,3 +215,48 @@ SET @HexCode = '00'
 SET @HexMsg = 'Payment Succeeded'
 END
 GO
+
+
+CREATE OR ALTER PROC usp_Treasury_GetMembersPaid
+@Month NVARCHAR(2),
+@Year NVARCHAR(4)
+AS
+BEGIN
+
+SELECT Members.*,Fees.* FROM Fees
+INNER JOIN Members
+ON Members.MemberID = Fees.MemberID
+WHERE PaymentYear Like '%' + @Year + '%'
+AND PaymentMonth = @Month
+AND Fees.MemberID IS NOT NULL
+
+END
+GO
+
+CREATE OR ALTER PROC usp_Treasury_GetHistoryMember
+@MemberID INT
+AS
+BEGIN
+
+SELECT Members.*,Fees.* FROM Fees
+INNER JOIN Members
+ON Members.MemberID = Fees.MemberID
+AND Fees.MemberID = @MemberID
+
+END
+GO
+
+CREATE OR ALTER PROC usp_Treasury_GetHistoryMemberByYear
+@MemberID INT,
+@Year NVARCHAR(4)
+AS
+BEGIN
+
+SELECT Members.*,Fees.* FROM Fees
+INNER JOIN Members
+ON Members.MemberID = Fees.MemberID
+AND Fees.MemberID = @MemberID
+AND PaymentYear = @Year
+
+END
+GO
