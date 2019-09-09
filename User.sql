@@ -72,7 +72,6 @@ END
 UPDATE Members
 SET LogInStatus = '00' --Logged In
 WHERE Mail = @Email
-AND MemberPassword = @Password
 AND LogInStatus = '01' --Was Already Logged Out
 AND MemberStatus <> '04' --Suspended
 
