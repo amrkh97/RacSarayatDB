@@ -49,32 +49,33 @@ CREATE TABLE Positions
 INSERT INTO Positions
 (PositionName, PositionDescription)
 VALUES
-('Past-President','Past-President'),
-('President','President'),
-('Vice President', 'Vice President'),
-('Secretary', 'Secretary'),
-('Treasurer','Treasurer'),
-('Public Relations', 'Public Relations'),
-('Fundraising','Fundraising'),
-('International','International'),
-('Community','Community'),
-('Club Service','Club Service'),
-('Member','Member')
+('Past-President','Past-President'), --1
+('President','President'), --2
+('Vice President', 'Vice President'), --3
+('Secretary', 'Secretary'), --4
+('Treasurer','Treasurer'), --5
+('Public Relations', 'Public Relations'), --6
+('Fundraising','Fundraising'), --7
+('International','International'), --8
+('Community','Community'), --9
+('Club Service','Club Service'), --10
+('Member','Member') --11
 
 CREATE TABLE Members
 (
-    MemberID Int IDENTITY,
-    ID NVARCHAR(14) UNIQUE NOT NULL,
-    FName NVARCHAR(64),
-    LName NVARCHAR(64),
-    BirthDate DATETIME DEFAULT GETDATE(),
-    Age as DATEDIFF(YEAR, BirthDate, GETDATE()),
-    Mail NVARCHAR(100) UNIQUE NOT NULL,
-    MemberPassword NVARCHAR(250),
-    YearsInClub NVARCHAR(2) DEFAULT '0',
-    PositionID INT,
-    MemberStatus NVARCHAR(2) DEFAULT '00',
-    LogInStatus NVARCHAR(2) DEFAULT '00',
+    MemberID Int IDENTITY, --1
+    ID NVARCHAR(14) UNIQUE NOT NULL, --2
+    FName NVARCHAR(64), --3
+    LName NVARCHAR(64), --4
+    BirthDate DATETIME DEFAULT GETDATE(), --5
+    Age as DATEDIFF(YEAR, BirthDate, GETDATE()), --6
+    Mail NVARCHAR(100) UNIQUE NOT NULL, --7
+    MemberPassword NVARCHAR(250), --8
+    YearsInClub NVARCHAR(2) DEFAULT '0', --9
+    PositionID INT, --10
+    MemberStatus NVARCHAR(2) DEFAULT '00', --11
+    LogInStatus NVARCHAR(2) DEFAULT '00', --12
+    RotaryID NVARCHAR(25), --13
 
     PRIMARY KEY(MemberID),
     FOREIGN KEY(PositionID) REFERENCES Positions(ID),
@@ -169,6 +170,15 @@ VALUES
     N'12345678',
     N'3',
     3
+),
+(
+    N'32104090101931',
+    N'Sondos',
+    N'Khaled',
+    N'sondoskh99@gmail.com',
+    N'12345678',
+    N'1',
+    11
 )
 
 INSERT INTO Treasury
