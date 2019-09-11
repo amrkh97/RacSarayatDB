@@ -43,7 +43,7 @@ CREATE TABLE Positions
     PositionName NVARCHAR(64),
     PositionDescription NVARCHAR(MAX)
 
-        PRIMARY KEY(ID)
+    PRIMARY KEY(ID)
 );
 
 INSERT INTO Positions
@@ -145,8 +145,12 @@ VALUES
 CREATE TABLE MemberPositions
 (
     ID INT IDENTITY,
-
-    PRIMARY KEY(ID)
+    MemberID INT,
+    MemberPositionID INT,
+    RotarianYear NVARCHAR(10),
+    PRIMARY KEY(ID),
+    FOREIGN KEY(MemberID) REFERENCES Members(MemberID),
+    FOREIGN KEY(MemberPositionID) REFERENCES Positions(ID)
 );
 
 CREATE TABLE Treasury
@@ -214,7 +218,7 @@ VALUES
 
 INSERT INTO Treasury
     (
-    CurrentAmount
+        CurrentAmount
     )
 VALUES
     (
