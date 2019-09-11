@@ -1,0 +1,529 @@
+{
+	"info": {
+		"_postman_id": "099fcec1-3ae5-45b4-9eac-6257441b9f4c",
+		"name": "Rotaract",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"amrkh97@gmail.com\",\n\t\"password\":\"12345678\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\":\"amrkh97@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Member Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"memberID\":1,\n\t\"memberStatusCode\":\"0AW\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/user/updateMemberStatus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"user",
+								"updateMemberStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign To Position",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"memberID\":1,\n\t\"position\":3,\n\t\"rotarianYear\":\"2019\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/user/assignToPosition",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"user",
+								"assignToPosition"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Position",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"position\":3,\n\t\"rotarianYear\":\"2019\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/user/getByPosition",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"user",
+								"getByPosition"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Treasury",
+			"item": [
+				{
+					"name": "Get By Year",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"year\":\"2019\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/treasury/getByYear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"treasury",
+								"getByYear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Month And Year",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"year\":\"2019\",\n\t\"month\":\"11\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/treasury/getByMonthAndYear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"treasury",
+								"getByMonthAndYear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Monthly Fees",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"memberID\":1,\n\t\"paidAmount\":50,\n\t\"month\":\"11\",\n\t\"year\":\"2029\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/treasury/addMonthlyFees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"treasury",
+								"addMonthlyFees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pay From Treasury",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"paidAmount\":1000,\n\t\"recieverOfPayment\":\"MAKANAK\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/treasury/pay",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"treasury",
+								"pay"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member Payment Records",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"memberID\":1\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/treasury/getMemberRecord",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"treasury",
+								"getMemberRecord"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member Payment Records By Year",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"memberID\":1,\n\t\"year\":\"2019\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/treasury/getMemberRecordByYear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"treasury",
+								"getMemberRecordByYear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Member Who Paid By Year Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"month\":\"9\",\n\t\"year\":\"2019\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/treasury/getPaidMembers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"treasury",
+								"getPaidMembers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Positions",
+			"item": [
+				{
+					"name": "Add A Position",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"positionName\":\"Amr\",\n\t\"positionDescription\":\"TEST\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/position/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"position",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Positions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/position/getAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"position",
+								"getAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Position Description",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"positionID\":12,\n\t\"positionDescription\":\"Hello From THERE\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/Sarayat/api/position/editDescription",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"Sarayat",
+								"api",
+								"position",
+								"editDescription"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Check Server Sarayat",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/Sarayat/api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"Sarayat",
+						"api"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
