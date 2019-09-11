@@ -260,3 +260,48 @@ AND PaymentYear = @Year
 
 END
 GO
+--------------------------------------------------------------------------------------------------
+
+CREATE OR ALTER PROC usp_User_ChangeStatus
+@MemberID INT,
+@NewStatus NVARCHAR(2),
+@HexCode NVARCHAR(2) OUTPUT,
+@HexMsg NVARCHAR(100) OUTPUT
+AS
+BEGIN
+
+
+IF NOT EXISTS(SELECT * FROM Members WHERE MemberID = @MemberID)
+BEGIN
+SET @HexCode = '01'
+SET @HexMsg = 'User Not Found'
+RETURN -1
+END
+
+
+IF NOT EXISTS(SELECT * FROM MemberStatus WHERE StatusCode = @NewStatus)
+BEGIN
+SET @HexCode = '02'
+SET @HexMsg = 'Sent Status Is Not Defined'
+RETURN -1
+END
+
+DECLARE @CurrentStatus NVARCHAR(2)
+SET @CurrentStatus = (
+    SELECT MemberStatus FROM Members WHERE MemberID =@MemberID
+)
+
+IF(@CurrentStatus = @NewStatus)
+BEGIN
+SET @HexCode = '00'
+SET @HexMsg = 'User Is Already: ' + (SELECT StatusMeaning FROM MemberStatus WHERE StatusCode = @CurrentStatus)
+END
+
+UPDATE Members
+SET MemberStatus = @NewStatus
+WHERE MemberID = @MemberID
+
+SET @HexCode ='00'
+SET @HexMsg = 'Updated Successfully'
+END
+GO

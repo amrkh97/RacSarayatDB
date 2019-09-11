@@ -11,30 +11,30 @@ CREATE TABLE MemberStatus
 );
 
 INSERT INTO MemberStatus
-(
+    (
     StatusCode,
     StatusMeaning
-)
+    )
 VALUES
-(
-    N'00',
-    N'Active Member'
+    (
+        N'00',
+        N'Active Member'
 ),
-(
-    N'01',
-    N'Freeze'
+    (
+        N'01',
+        N'Freeze'
 ),
-(
-    N'02',
-    N'Friend Of Club'
+    (
+        N'02',
+        N'Friend Of Club'
 ),
-(
-    N'03',
-    N'Old Member'
+    (
+        N'03',
+        N'Old Member'
 ),
-(
-    N'04',
-    N'Suspended Member'
+    (
+        N'04',
+        N'Suspended Member'
 )
 
 CREATE TABLE Positions
@@ -47,35 +47,59 @@ CREATE TABLE Positions
 );
 
 INSERT INTO Positions
-(PositionName, PositionDescription)
+    (PositionName, PositionDescription)
 VALUES
-('Past-President','Past-President'), --1
-('President','President'), --2
-('Vice President', 'Vice President'), --3
-('Secretary', 'Secretary'), --4
-('Treasurer','Treasurer'), --5
-('Public Relations', 'Public Relations'), --6
-('Fundraising','Fundraising'), --7
-('International','International'), --8
-('Community','Community'), --9
-('Club Service','Club Service'), --10
-('Member','Member') --11
+    ('Past-President', 'Past-President'),
+    --1
+    ('President', 'President'),
+    --2
+    ('Vice President', 'Vice President'),
+    --3
+    ('Secretary', 'Secretary'),
+    --4
+    ('Treasurer', 'Treasurer'),
+    --5
+    ('Public Relations', 'Public Relations'),
+    --6
+    ('Fundraising', 'Fundraising'),
+    --7
+    ('International', 'International'),
+    --8
+    ('Community', 'Community'),
+    --9
+    ('Club Service', 'Club Service'),
+    --10
+    ('Member', 'Member')
+    --11
 
 CREATE TABLE Members
 (
-    MemberID Int IDENTITY, --1
-    ID NVARCHAR(14) UNIQUE NOT NULL, --2
-    FName NVARCHAR(64), --3
-    LName NVARCHAR(64), --4
-    BirthDate DATETIME DEFAULT GETDATE(), --5
-    Age as DATEDIFF(YEAR, BirthDate, GETDATE()), --6
-    Mail NVARCHAR(100) UNIQUE NOT NULL, --7
-    MemberPassword NVARCHAR(250), --8
-    YearsInClub NVARCHAR(2) DEFAULT '0', --9
-    PositionID INT, --10
-    MemberStatus NVARCHAR(2) DEFAULT '00', --11
-    LogInStatus NVARCHAR(2) DEFAULT '00', --12
-    RotaryID NVARCHAR(25), --13
+    MemberID Int IDENTITY,
+    --1
+    ID NVARCHAR(14) UNIQUE NOT NULL,
+    --2
+    FName NVARCHAR(64),
+    --3
+    LName NVARCHAR(64),
+    --4
+    BirthDate DATETIME DEFAULT GETDATE(),
+    --5
+    Age as DATEDIFF(YEAR, BirthDate, GETDATE()),
+    --6
+    Mail NVARCHAR(100) UNIQUE NOT NULL,
+    --7
+    MemberPassword NVARCHAR(250),
+    --8
+    YearsInClub NVARCHAR(2) DEFAULT '0',
+    --9
+    PositionID INT,
+    --10
+    MemberStatus NVARCHAR(2) DEFAULT '00',
+    --11
+    LogInStatus NVARCHAR(2) DEFAULT '00',
+    --12
+    RotaryID NVARCHAR(25),
+    --13
 
     PRIMARY KEY(MemberID),
     FOREIGN KEY(PositionID) REFERENCES Positions(ID),
@@ -106,17 +130,28 @@ CREATE TABLE GeneralParameters
 );
 
 INSERT INTO GeneralParameters
-(
+    (
     MemberShipFees,
     RotarianYear,
     MinimumThreshold
-)
+    )
 VALUES
+    (
+        50, --MemberShipFees
+        N'2019/2020', --RotarianYear
+        0 --MinimumThreshold
+    )
+
+CREATE TABLE MemberPositions
 (
-    50, --MemberShipFees
-    N'2019/2020', --RotarianYear
-    0 --MinimumThreshold
-)
+    ID INT IDENTITY,
+    MemberID INT,
+    MemberPositionID INT,
+    RotarianYear NVARCHAR(10),
+    PRIMARY KEY(ID),
+    FOREIGN KEY(MemberID) REFERENCES Members(MemberID),
+    FOREIGN KEY(MemberPositionID) REFERENCES Positions(ID)
+);
 
 CREATE TABLE Treasury
 (
@@ -152,7 +187,7 @@ CREATE TABLE Payments
 
 -- FOR TESTING PURPOSES ONLY
 INSERT INTO Members
-(
+    (
     ID,
     FName,
     LName,
@@ -160,32 +195,32 @@ INSERT INTO Members
     MemberPassword,
     YearsInClub,
     PositionID
-)
+    )
 VALUES
-(
-    N'29704090101931',
-    N'Amr',
-    N'Khaled',
-    N'amrkh97@gmail.com',
-    N'12345678',
-    N'3',
-    3
+    (
+        N'29704090101931',
+        N'Amr',
+        N'Khaled',
+        N'amrkh97@gmail.com',
+        N'12345678',
+        N'3',
+        3
 ),
-(
-    N'32104090101931',
-    N'Sondos',
-    N'Khaled',
-    N'sondoskh99@gmail.com',
-    N'12345678',
-    N'1',
-    11
+    (
+        N'32104090101931',
+        N'Sondos',
+        N'Khaled',
+        N'sondoskh99@gmail.com',
+        N'12345678',
+        N'1',
+        11
 )
 
 INSERT INTO Treasury
-(
-    CurrentAmount
-)
+    (
+        CurrentAmount
+    )
 VALUES
-(
-    1000
-)
+    (
+        1000
+    )
