@@ -11,30 +11,30 @@ CREATE TABLE MemberStatus
 );
 
 INSERT INTO MemberStatus
-    (
+(
     StatusCode,
     StatusMeaning
-    )
+)
 VALUES
-    (
-        N'00',
-        N'Active Member'
+(
+    N'00',
+    N'Active Member'
 ),
-    (
-        N'01',
-        N'Freeze'
+(
+    N'01',
+    N'Freeze'
 ),
-    (
-        N'02',
-        N'Friend Of Club'
+(
+    N'02',
+    N'Friend Of Club'
 ),
-    (
-        N'03',
-        N'Old Member'
+(
+    N'03',
+    N'Old Member'
 ),
-    (
-        N'04',
-        N'Suspended Member'
+(
+    N'04',
+    N'Suspended Member'
 )
 
 CREATE TABLE Positions
@@ -100,6 +100,7 @@ CREATE TABLE Members
     --12
     RotaryID NVARCHAR(25),
     --13
+    PhotoFTP NVARCHAR(200)
 
     PRIMARY KEY(MemberID),
     FOREIGN KEY(PositionID) REFERENCES Positions(ID),
@@ -130,17 +131,17 @@ CREATE TABLE GeneralParameters
 );
 
 INSERT INTO GeneralParameters
-    (
+(
     MemberShipFees,
     RotarianYear,
     MinimumThreshold
-    )
+)
 VALUES
-    (
-        50, --MemberShipFees
-        N'2019/2020', --RotarianYear
-        0 --MinimumThreshold
-    )
+(
+    50, --MemberShipFees
+    N'2019/2020', --RotarianYear
+    0 --MinimumThreshold
+)
 
 CREATE TABLE MemberPositions
 (
@@ -184,10 +185,64 @@ CREATE TABLE Payments
 
 );
 
+CREATE TABLE Committees
+(
+    ID INT IDENTITY,
+    CommitteeName NVARCHAR(50),
+    CommitteeDescription NVARCHAR(500)
+    PRIMARY KEY(ID)
+);
+
+INSERT INTO Committees
+(
+    CommitteeName,
+    CommitteeDescription
+)
+VALUES
+(
+    N'CLub Service',
+    N'Club Service'
+),
+(
+    N'International Understanding',
+    N'International Understanding'
+),
+(
+    N'Fundraising',
+    N'Fundraising'
+),
+(
+    N'Community Service',
+    N'Community Service'
+),
+(
+    N'Professional Development',
+    N'Professional Development'
+),
+(
+    N'Public Relations',
+    N'Public Relations'
+)
+
+CREATE TABLE Projects
+(
+    ID INT IDENTITY,
+    ProjectName NVARCHAR(100),
+    ProjectDescription NVARCHAR(500),
+    ProjectExpectedDate DATETIME DEFAULT GETDATE(),
+    ProjectHead INT,
+    ProjectYear NVARCHAR(10),
+    ProjectCommittee INT,
+    ProjectDocumentFTP NVARCHAR(500),
+
+    PRIMARY KEY(ID),
+    FOREIGN KEY(ProjectHead) REFERENCES Memebers(MemberID),
+    FOREIGN KEY(ProjectCommittee) REFERENCES Committees(ID)
+);
 
 -- FOR TESTING PURPOSES ONLY
 INSERT INTO Members
-    (
+(
     ID,
     FName,
     LName,
@@ -195,32 +250,32 @@ INSERT INTO Members
     MemberPassword,
     YearsInClub,
     PositionID
-    )
+)
 VALUES
-    (
-        N'29704090101931',
-        N'Amr',
-        N'Khaled',
-        N'amrkh97@gmail.com',
-        N'12345678',
-        N'3',
-        3
+(
+    N'29704090101931',
+    N'Amr',
+    N'Khaled',
+    N'amrkh97@gmail.com',
+    N'12345678',
+    N'3',
+    3
 ),
-    (
-        N'32104090101931',
-        N'Sondos',
-        N'Khaled',
-        N'sondoskh99@gmail.com',
-        N'12345678',
-        N'1',
-        11
+(
+    N'32104090101931',
+    N'Sondos',
+    N'Khaled',
+    N'sondoskh99@gmail.com',
+    N'12345678',
+    N'1',
+    11
 )
 
 INSERT INTO Treasury
-    (
-        CurrentAmount
-    )
+(
+    CurrentAmount
+)
 VALUES
-    (
-        1000
-    )
+(
+    1000
+)
